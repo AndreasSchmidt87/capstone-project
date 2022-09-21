@@ -10,14 +10,14 @@ const players = {
 };
 
 export default function XOGame() {
-  // const [board, setBoard] = useState(Array(9).fill(""));
+  
   const [board, setBoard] = useState([
     ["", "", ""],
     ["", "", ""],
     ["", "", ""],
   ]);
 
-  function playFn(arrayIndex, index) {
+  function playFieldNr(arrayIndex, index) {
     
     
     board[arrayIndex][index] = players?.HUMAN?.SYM;
@@ -26,7 +26,7 @@ export default function XOGame() {
     
   }
 
-  function playAgainFn() {
+  function playAgainFieldNr() {
     setBoard([
       ["", "", ""],
       ["", "", ""],
@@ -40,41 +40,41 @@ export default function XOGame() {
       <>
         <Matchfield>
           <Col />
-            <Cell onClick={() => playFn(0, 0)} >
+            <Cell onClick={() => playFieldNr(0, 0)} >
               {board[0][0]}
             </Cell>
-            <Cell onClick={() => playFn(0, 1)} >
+            <Cell onClick={() => playFieldNr(0, 1)} >
               {board[0][1]}
             </Cell>
-            <Cell onClick={() => playFn(0, 2)} >
+            <Cell onClick={() => playFieldNr(0, 2)} >
               {board[0][2]}
             </Cell>
           
           <Col />
-            <Cell onClick={() => playFn(1, 0)} >
+            <Cell onClick={() => playFieldNr(1, 0)} >
               {board[1][0]}
             </Cell>
-            <Cell onClick={() => playFn(1, 1)} >
+            <Cell onClick={() => playFieldNr(1, 1)} >
               {board[1][1]}
             </Cell>
-            <Cell onClick={() => playFn(1, 2)} >
+            <Cell onClick={() => playFieldNr(1, 2)} >
               {board[1][2]}
             </Cell>
           
           <Col />
-            <Cell onClick={() => playFn(2, 0)} >
+            <Cell onClick={() => playFieldNr(2, 0)} >
               {board[2][0]}
             </Cell>
-            <Cell onClick={() => playFn(2, 1)} >
+            <Cell onClick={() => playFieldNr(2, 1)} >
               {board[2][1]}
             </Cell>
-            <Cell onClick={() => playFn(2, 2)} >
+            <Cell onClick={() => playFieldNr(2, 2)} >
               {board[2][2]}
             </Cell>
           
         </Matchfield>
         
-        <Button onClick={playAgainFn}>
+        <Button onClick={playAgainFieldNr}>
             Restart
         </Button>
           

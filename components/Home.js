@@ -10,25 +10,6 @@ const Main = styled.main`
   justify-content: center;
   align-items: center;
 
-@media (max-width: 600px) {
-  grid {
-    width: 100%;
-    flex-direction: column;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  card,
-  footer {
-    border-color: #222;
-  }
-  code {
-    background: #111;
-  }
-  logo img {
-    filter: invert(1);
-  }
-}
 `;
 
 export default Main;
