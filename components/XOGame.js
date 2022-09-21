@@ -17,7 +17,7 @@ export default function XOGame() {
     ["", "", ""],
   ]);
 
-  function playFieldNr(arrayIndex, index) {
+  function playFieldLocation(arrayIndex, index) {
     
     
     board[arrayIndex][index] = players?.HUMAN?.SYM;
@@ -26,7 +26,7 @@ export default function XOGame() {
     
   }
 
-  function playAgainFieldNr() {
+  function playAgainFieldLocation() {
     setBoard([
       ["", "", ""],
       ["", "", ""],
@@ -40,41 +40,41 @@ export default function XOGame() {
       <>
         <Matchfield>
           <Col />
-            <Cell onClick={() => playFieldNr(0, 0)} >
+            <Cell onClick={() => playFieldLocation(0, 0)} >
               {board[0][0]}
             </Cell>
-            <Cell onClick={() => playFieldNr(0, 1)} >
+            <Cell onClick={() => playFieldLocation(0, 1)} >
               {board[0][1]}
             </Cell>
-            <Cell onClick={() => playFieldNr(0, 2)} >
+            <Cell onClick={() => playFieldLocation(0, 2)} >
               {board[0][2]}
             </Cell>
           
           <Col />
-            <Cell onClick={() => playFieldNr(1, 0)} >
+            <Cell onClick={() => playFieldLocation(1, 0)} >
               {board[1][0]}
             </Cell>
-            <Cell onClick={() => playFieldNr(1, 1)} >
+            <Cell onClick={() => playFieldLocation(1, 1)} >
               {board[1][1]}
             </Cell>
-            <Cell onClick={() => playFieldNr(1, 2)} >
+            <Cell onClick={() => playFieldLocation(1, 2)} >
               {board[1][2]}
             </Cell>
           
           <Col />
-            <Cell onClick={() => playFieldNr(2, 0)} >
+            <Cell onClick={() => playFieldLocation(2, 0)} >
               {board[2][0]}
             </Cell>
-            <Cell onClick={() => playFieldNr(2, 1)} >
+            <Cell onClick={() => playFieldLocation(2, 1)} >
               {board[2][1]}
             </Cell>
-            <Cell onClick={() => playFieldNr(2, 2)} >
+            <Cell onClick={() => playFieldLocation(2, 2)} >
               {board[2][2]}
             </Cell>
           
         </Matchfield>
         
-        <Button onClick={playAgainFieldNr}>
+        <Button onClick={playAgainFieldLocation}>
             Restart
         </Button>
           
@@ -86,7 +86,6 @@ export default function XOGame() {
 
 const Matchfield = styled.section`
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   background-image: url(https://i.imgur.com/OVBsgc1.jpg);
   background-repeat: no-repeat;
