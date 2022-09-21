@@ -26,7 +26,7 @@ export default function XOGame() {
     
   }
 
-  function playAgainFieldLocation() {
+  function resetPlayBoard() {
     setBoard([
       ["", "", ""],
       ["", "", ""],
@@ -74,7 +74,7 @@ export default function XOGame() {
           
         </Matchfield>
         
-        <Button onClick={playAgainFieldLocation}>
+        <Button onClick={resetPlayBoard}>
             Restart
         </Button>
           
