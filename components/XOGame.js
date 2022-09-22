@@ -1,13 +1,24 @@
 import styled from "styled-components";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const players = {
-
+  CPU: {
+    SYM: "O",
+    NAME: "CPU",
+  },
   HUMAN: {
   SYM: "X",
   NAME: "You",
   },
 };
+
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
 
 export default function XOGame() {
   
@@ -17,14 +28,46 @@ export default function XOGame() {
     ["", "", ""],
   ]);
 
+  const [isCPUNext, setIsCPUNext] = useState(false);
+
   function playFieldLocation(arrayIndex, index) {
     
     
     board[arrayIndex][index] = players?.HUMAN?.SYM;
     setBoard((board) => [...board]);
     
-    
+    setIsCPUNext(true);
   }
+
+  useEffect(() => {
+    if (isCPUNext) {
+      cPUPlay();
+    }
+  }, [isCPUNext]);
+
+  function cPUPlay() {
+    sleep(1000);
+
+    const cPUMove = getCPUTurn();
+
+    board[cPUMove.arrayIndex][cPUMove.index] = players?.CPU?.SYM;
+
+    setBoard((board) => [...board]);
+    setIsCPUNext(false);
+  }
+
+  function getCPUTurn() {
+    const emptyIndexes = [];
+    board.forEach((row, arrayIndex) => {
+      row.forEach((cell, index) => {
+        if (cell === "") {
+         emptyIndexes.push({arrayIndex, index});
+        }
+      });
+    });
+    const randomIndex = Math.floor(Math.random() * emptyIndexes.length);
+    return emptyIndexes[randomIndex];
+  }  
 
   function resetPlayBoard() {
     setBoard([
@@ -32,7 +75,7 @@ export default function XOGame() {
       ["", "", ""],
       ["", "", ""],
     ]);
-   
+    setIsCPUNext(false);
   }
 
   
