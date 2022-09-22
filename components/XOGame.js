@@ -4,11 +4,9 @@ import { useEffect, useState } from "react";
 const players = {
   CPU: {
     SYMBOL: "O",
-    NAME: "CPU",
   },
   HUMAN: {
     SYMBOL: "X",
-    NAME: "You",
   },
 };
 
@@ -25,7 +23,7 @@ export default function XOGame() {
   function playFieldLocation(arrayIndex, index) {
     if (!isCPUNext) {
 
-      board[arrayIndex][index] = players?.HUMAN?.SYMBOLE;
+      board[arrayIndex][index] = players?.HUMAN?.SYMBOL;
       setBoard((board) => [...board]);
 
       setIsCPUNext(true);
@@ -42,7 +40,7 @@ export default function XOGame() {
 
     const cpuMove = getCPUTurn();
 
-    board[cpuMove.rowIndex][cpuMove.columnIndex] = players?.CPU?.SYMBOLE;
+    board[cpuMove.rowIndex][cpuMove.columnIndex] = players?.CPU?.SYMBOL;
 
     setBoard((board) => [...board]);
     setIsCPUNext(false);
