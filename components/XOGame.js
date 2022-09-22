@@ -1,27 +1,19 @@
 import styled from "styled-components";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 const players = {
   CPU: {
-    SYM: "O",
+    SYMBOLE: "O",
     NAME: "CPU",
   },
   HUMAN: {
-  SYM: "X",
-  NAME: "You",
+    SYMBOLE: "X",
+    NAME: "You",
   },
 };
 
-function sleep(milliseconds) {
-  const date = Date.now();
-  let currentDate = null;
-  do {
-    currentDate = Date.now();
-  } while (currentDate - date < milliseconds);
-}
-
 export default function XOGame() {
-  
+
   const [board, setBoard] = useState([
     ["", "", ""],
     ["", "", ""],
@@ -31,26 +23,26 @@ export default function XOGame() {
   const [isCPUNext, setIsCPUNext] = useState(false);
 
   function playFieldLocation(arrayIndex, index) {
-    
-    
-    board[arrayIndex][index] = players?.HUMAN?.SYM;
-    setBoard((board) => [...board]);
-    
-    setIsCPUNext(true);
+    if (!isCPUNext) {
+
+      board[arrayIndex][index] = players?.HUMAN?.SYMBOLE;
+      setBoard((board) => [...board]);
+
+      setIsCPUNext(true);
+    }
   }
 
   useEffect(() => {
     if (isCPUNext) {
-      cPUPlay();
+      setTimeout(cpuPlay, 1000);
     }
   }, [isCPUNext]);
 
-  function cPUPlay() {
-    sleep(1000);
+  function cpuPlay() {
 
-    const cPUMove = getCPUTurn();
+    const cpuMove = getCPUTurn();
 
-    board[cPUMove.arrayIndex][cPUMove.index] = players?.CPU?.SYM;
+    board[cpuMove.rowIndex][cpuMove.columnIndex] = players?.CPU?.SYMBOLE;
 
     setBoard((board) => [...board]);
     setIsCPUNext(false);
@@ -58,16 +50,16 @@ export default function XOGame() {
 
   function getCPUTurn() {
     const emptyIndexes = [];
-    board.forEach((row, arrayIndex) => {
-      row.forEach((cell, index) => {
+    board.forEach((row, rowIndex) => {
+      row.forEach((cell, columnIndex) => {
         if (cell === "") {
-         emptyIndexes.push({arrayIndex, index});
+          emptyIndexes.push({ rowIndex, columnIndex });
         }
       });
     });
     const randomIndex = Math.floor(Math.random() * emptyIndexes.length);
     return emptyIndexes[randomIndex];
-  }  
+  }
 
   function resetPlayBoard() {
     setBoard([
@@ -75,56 +67,56 @@ export default function XOGame() {
       ["", "", ""],
       ["", "", ""],
     ]);
-    setIsCPUNext(false);
+    setIsCPUNext(false)
   }
 
-  
+
   return (
-      <>
-        <Matchfield>
-          <Col />
-            <Cell onClick={() => playFieldLocation(0, 0)} >
-              {board[0][0]}
-            </Cell>
-            <Cell onClick={() => playFieldLocation(0, 1)} >
-              {board[0][1]}
-            </Cell>
-            <Cell onClick={() => playFieldLocation(0, 2)} >
-              {board[0][2]}
-            </Cell>
-          
-          <Col />
-            <Cell onClick={() => playFieldLocation(1, 0)} >
-              {board[1][0]}
-            </Cell>
-            <Cell onClick={() => playFieldLocation(1, 1)} >
-              {board[1][1]}
-            </Cell>
-            <Cell onClick={() => playFieldLocation(1, 2)} >
-              {board[1][2]}
-            </Cell>
-          
-          <Col />
-            <Cell onClick={() => playFieldLocation(2, 0)} >
-              {board[2][0]}
-            </Cell>
-            <Cell onClick={() => playFieldLocation(2, 1)} >
-              {board[2][1]}
-            </Cell>
-            <Cell onClick={() => playFieldLocation(2, 2)} >
-              {board[2][2]}
-            </Cell>
-          
-        </Matchfield>
-        
-        <Button onClick={resetPlayBoard}>
-            Restart
-        </Button>
-          
-        
-      </>
-      
-    );
+    <>
+      <Matchfield>
+        <Col />
+        <Cell onClick={() => playFieldLocation(0, 0)} >
+          {board[0][0]}
+        </Cell>
+        <Cell onClick={() => playFieldLocation(0, 1)} >
+          {board[0][1]}
+        </Cell>
+        <Cell onClick={() => playFieldLocation(0, 2)} >
+          {board[0][2]}
+        </Cell>
+
+        <Col />
+        <Cell onClick={() => playFieldLocation(1, 0)} >
+          {board[1][0]}
+        </Cell>
+        <Cell onClick={() => playFieldLocation(1, 1)} >
+          {board[1][1]}
+        </Cell>
+        <Cell onClick={() => playFieldLocation(1, 2)} >
+          {board[1][2]}
+        </Cell>
+
+        <Col />
+        <Cell onClick={() => playFieldLocation(2, 0)} >
+          {board[2][0]}
+        </Cell>
+        <Cell onClick={() => playFieldLocation(2, 1)} >
+          {board[2][1]}
+        </Cell>
+        <Cell onClick={() => playFieldLocation(2, 2)} >
+          {board[2][2]}
+        </Cell>
+
+      </Matchfield>
+
+      <Button onClick={resetPlayBoard}>
+        Restart
+      </Button>
+
+
+    </>
+
+  );
 }
 
 const Matchfield = styled.section`
