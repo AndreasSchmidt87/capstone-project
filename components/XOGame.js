@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 const players = {
   CPU: {
     SYMBOL: "O",
+    NAME: "CPU",
   },
   HUMAN: {
     SYMBOL: "X",
+    NAME: "You",
   },
 };
 
