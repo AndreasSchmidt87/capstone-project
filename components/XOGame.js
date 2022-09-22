@@ -3,12 +3,10 @@ import { useEffect, useState } from "react";
 
 const players = {
   CPU: {
-    SYMBOLE: "O",
-    NAME: "CPU",
+    SYMBOL: "O",
   },
   HUMAN: {
-    SYMBOLE: "X",
-    NAME: "You",
+    SYMBOL: "X",
   },
 };
 
