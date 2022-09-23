@@ -1,29 +1,62 @@
 import styled from "styled-components";
-import {useState} from "react";
+import { useEffect, useState } from "react";
 
 const players = {
-
+  CPU: {
+    SYMBOL: "O",
+  },
   HUMAN: {
-  SYM: "X",
-  NAME: "You",
+    SYMBOL: "X",
   },
 };
 
 export default function XOGame() {
-  
+
   const [board, setBoard] = useState([
     ["", "", ""],
     ["", "", ""],
     ["", "", ""],
   ]);
 
+  const [isCPUNext, setIsCPUNext] = useState(false);
+
   function playFieldLocation(arrayIndex, index) {
-    
-    
-    board[arrayIndex][index] = players?.HUMAN?.SYM;
+    if (!isCPUNext) {
+
+      board[arrayIndex][index] = players?.HUMAN?.SYMBOL;
+      setBoard((board) => [...board]);
+
+      setIsCPUNext(true);
+    }
+  }
+
+  useEffect(() => {
+    if (isCPUNext) {
+      setTimeout(cpuPlay, 1000);
+    }
+  }, [isCPUNext]);
+
+  function cpuPlay() {
+
+    const cpuMove = getCPUTurn();
+
+    board[cpuMove.rowIndex][cpuMove.columnIndex] = players?.CPU?.SYMBOL;
+
     setBoard((board) => [...board]);
-    
-    
+    setIsCPUNext(false);
+  }
+
+  function getCPUTurn() {
+    const emptyIndexes = [];
+    board.forEach((row, rowIndex) => {
+      row.forEach((cell, columnIndex) => {
+        if (cell === "") {
+          emptyIndexes.push({ rowIndex, columnIndex });
+        }
+      });
+    });
+    const randomIndex = Math.floor(Math.random() * emptyIndexes.length);
+    return emptyIndexes[randomIndex];
   }
 
   function resetPlayBoard() {
@@ -32,56 +65,56 @@ export default function XOGame() {
       ["", "", ""],
       ["", "", ""],
     ]);
-   
+    setIsCPUNext(false)
   }
 
-  
+
   return (
-      <>
-        <Matchfield>
-          <Col />
-            <Cell onClick={() => playFieldLocation(0, 0)} >
-              {board[0][0]}
-            </Cell>
-            <Cell onClick={() => playFieldLocation(0, 1)} >
-              {board[0][1]}
-            </Cell>
-            <Cell onClick={() => playFieldLocation(0, 2)} >
-              {board[0][2]}
-            </Cell>
-          
-          <Col />
-            <Cell onClick={() => playFieldLocation(1, 0)} >
-              {board[1][0]}
-            </Cell>
-            <Cell onClick={() => playFieldLocation(1, 1)} >
-              {board[1][1]}
-            </Cell>
-            <Cell onClick={() => playFieldLocation(1, 2)} >
-              {board[1][2]}
-            </Cell>
-          
-          <Col />
-            <Cell onClick={() => playFieldLocation(2, 0)} >
-              {board[2][0]}
-            </Cell>
-            <Cell onClick={() => playFieldLocation(2, 1)} >
-              {board[2][1]}
-            </Cell>
-            <Cell onClick={() => playFieldLocation(2, 2)} >
-              {board[2][2]}
-            </Cell>
-          
-        </Matchfield>
-        
-        <Button onClick={resetPlayBoard}>
-            Restart
-        </Button>
-          
-        
-      </>
-      
-    );
+    <>
+      <Matchfield>
+        <Col />
+        <Cell onClick={() => playFieldLocation(0, 0)} >
+          {board[0][0]}
+        </Cell>
+        <Cell onClick={() => playFieldLocation(0, 1)} >
+          {board[0][1]}
+        </Cell>
+        <Cell onClick={() => playFieldLocation(0, 2)} >
+          {board[0][2]}
+        </Cell>
+
+        <Col />
+        <Cell onClick={() => playFieldLocation(1, 0)} >
+          {board[1][0]}
+        </Cell>
+        <Cell onClick={() => playFieldLocation(1, 1)} >
+          {board[1][1]}
+        </Cell>
+        <Cell onClick={() => playFieldLocation(1, 2)} >
+          {board[1][2]}
+        </Cell>
+
+        <Col />
+        <Cell onClick={() => playFieldLocation(2, 0)} >
+          {board[2][0]}
+        </Cell>
+        <Cell onClick={() => playFieldLocation(2, 1)} >
+          {board[2][1]}
+        </Cell>
+        <Cell onClick={() => playFieldLocation(2, 2)} >
+          {board[2][2]}
+        </Cell>
+
+      </Matchfield>
+
+      <Button onClick={resetPlayBoard}>
+        Restart
+      </Button>
+
+
+    </>
+
+  );
 }
 
 const Matchfield = styled.section`
