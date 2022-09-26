@@ -12,6 +12,11 @@ const players = {
   },
 };
 
+const playerSymbol = players?.HUMAN?.SYMBOL;
+const cpuSymbol = players?.CPU?.SYMBOL;
+const playerName = players?.HUMAN?.NAME;
+const cpuName = players?.CPU?.NAME;
+
 export default function XOGame() {
 
   const [board, setBoard] = useState([
@@ -26,7 +31,7 @@ export default function XOGame() {
   function playFieldLocation(rowIndex, columnIndex) {
     if (!isCPUNext) {
       if (winner) return;
-      board[rowIndex][columnIndex] = players?.HUMAN?.SYMBOL;
+      board[rowIndex][columnIndex] = playerSymbol;
       setBoard((board) => [...board]);
       checkWinner();
       setIsCPUNext(true);
@@ -45,7 +50,7 @@ export default function XOGame() {
 
     const cpuMove = getCPUTurn();
 
-    board[cpuMove.rowIndex][cpuMove.columnIndex] = players?.CPU?.SYMBOL;
+    board[cpuMove.rowIndex][cpuMove.columnIndex] = cpuSymbol;
 
     setBoard((board) => [...board]);
     checkWinner();
@@ -68,39 +73,39 @@ export default function XOGame() {
   function checkWinner() {
     for (let columnIndex = 0; columnIndex < board.length; columnIndex++) {
       const row = board[columnIndex];
-      if (row.every((cell) => cell === players?.CPU?.SYMBOL)) {
-        setWinner(players?.CPU?.NAME);
+      if (row.every((cell) => cell === cpuSymbol)) {
+        setWinner(cpuName);
         return;
-      } else if (row.every((cell) => cell === players?.HUMAN?.SYMBOL)) {
-        setWinner(players?.HUMAN?.NAME);
+      } else if (row.every((cell) => cell === playerSymbol)) {
+        setWinner(playerName);
         return;
       }
     }
 
     for (let i = 0; i < 3; i++) {
       const column = board.map((row) => row[i]);
-      if (column.every((cell) => cell === players?.CPU?.SYMBOL)) {
-        setWinner(players?.CPU?.NAME);
+      if (column.every((cell) => cell === cpuSymbol)) {
+        setWinner(cpuName);
         return;
-      } else if (column.every((cell) => cell === players?.HUMAN?.SYMBOL)) {
-        setWinner(players?.HUMAN?.NAME);
+      } else if (column.every((cell) => cell === playerSymbol)) {
+        setWinner(playerName);
         return;
       }
     }
 
     const diagonal1 = [board[0][0], board[1][1], board[2][2]];
     const diagonal2 = [board[0][2], board[1][1], board[2][0]];
-    if (diagonal1.every((cell) => cell === players?.CPU?.SYMBOL)) {
-      setWinner(players?.CPU?.NAME);
+    if (diagonal1.every((cell) => cell === cpuSymbol)) {
+      setWinner(cpuName);
       return;
-    } else if (diagonal1.every((cell) => cell === players?.HUMAN?.SYMBOL)) {
-      setWinner(players?.HUMAN?.NAME);
+    } else if (diagonal1.every((cell) => cell === playerSymbol)) {
+      setWinner(playerName);
       return;
-    } else if (diagonal2.every((cell) => cell === players?.CPU?.SYMBOL)) {
-      setWinner(players?.CPU?.NAME);
+    } else if (diagonal2.every((cell) => cell === cpuSymbol)) {
+      setWinner(cpuName);
       return;
-    } else if (diagonal2.every((cell) => cell === players?.HUMAN?.SYMBOL)) {
-      setWinner(players?.HUMAN?.NAME);
+    } else if (diagonal2.every((cell) => cell === playerSymbol)) {
+      setWinner(playerName);
       return;
     } else if (board.flat().every((cell) => cell !== "")) {
       setWinner("draw");
