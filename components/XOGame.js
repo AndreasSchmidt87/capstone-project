@@ -12,10 +12,10 @@ const players = {
   },
 };
 
-const playerSymbol = players?.HUMAN?.SYMBOL;
-const cpuSymbol = players?.CPU?.SYMBOL;
-const playerName = players?.HUMAN?.NAME;
-const cpuName = players?.CPU?.NAME;
+const playerSymbol = players.HUMAN.SYMBOL;
+const cpuSymbol = players.CPU.SYMBOL;
+const playerName = players.HUMAN.NAME;
+const cpuName = players.CPU.NAME;
 
 export default function XOGame() {
 
@@ -142,10 +142,8 @@ export default function XOGame() {
     setIsCPUNext(false);
   }
 
-
   return (
     <>
-
       <h2>{!winner && displayTurn() || winner && displayWinner()}</h2>
       <Matchfield>
         <Col />
@@ -186,9 +184,7 @@ export default function XOGame() {
           Restart
         </Button>
       )}
-
     </>
-
   );
 }
 
