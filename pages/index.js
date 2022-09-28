@@ -3,7 +3,8 @@ import Header from "../components/Header";
 import XOGame from "../components/XOGame";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
+import Image from "next/image";
+import XOPic from "../components/pictures/XOPic.png"
 
 export default function Home() {
   const router = useRouter();
@@ -16,7 +17,7 @@ export default function Home() {
         <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
       </Head>
       <Header />
-      <Link href="/xogame">X and O Game</Link>
+      <Link href="/xogame"><Image alt="" width="140" height="200" src={XOPic} /></Link>
     </>
   )
 }
