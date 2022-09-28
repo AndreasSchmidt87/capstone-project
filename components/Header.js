@@ -1,6 +1,6 @@
 export default function Header() {
     return (
-        <h1>X and O Game</h1>
+        <h1>Minigame Collection</h1>
     )
 }
 
