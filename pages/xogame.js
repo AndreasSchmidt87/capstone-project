@@ -148,38 +148,42 @@ export default function XOGame() {
                 <h1>X and O Game</h1>
                 <h2>{!winner && displayTurn() || winner && displayWinner()}</h2>
                 <Matchfield>
-                    <Col />
-                    <Cell onClick={() => playFieldLocation(0, 0)} >
-                        {board[0][0]}
-                    </Cell>
-                    <Cell onClick={() => playFieldLocation(0, 1)} >
-                        {board[0][1]}
-                    </Cell>
-                    <Cell onClick={() => playFieldLocation(0, 2)} >
-                        {board[0][2]}
-                    </Cell>
-
-                    <Col />
-                    <Cell onClick={() => playFieldLocation(1, 0)} >
-                        {board[1][0]}
-                    </Cell>
-                    <Cell onClick={() => playFieldLocation(1, 1)} >
-                        {board[1][1]}
-                    </Cell>
-                    <Cell onClick={() => playFieldLocation(1, 2)} >
-                        {board[1][2]}
-                    </Cell>
-
-                    <Col />
-                    <Cell onClick={() => playFieldLocation(2, 0)} >
-                        {board[2][0]}
-                    </Cell>
-                    <Cell onClick={() => playFieldLocation(2, 1)} >
-                        {board[2][1]}
-                    </Cell>
-                    <Cell onClick={() => playFieldLocation(2, 2)} >
-                        {board[2][2]}
-                    </Cell>
+                    <tbody>
+                        <Col />
+                        <Cell onClick={() => playFieldLocation(0, 0)} >
+                            {board[0][0]}
+                        </Cell>
+                        <Cell onClick={() => playFieldLocation(0, 1)} >
+                            {board[0][1]}
+                        </Cell>
+                        <Cell onClick={() => playFieldLocation(0, 2)} >
+                            {board[0][2]}
+                        </Cell>
+                    </tbody>
+                    <tbody>
+                        <Col />
+                        <Cell onClick={() => playFieldLocation(1, 0)} >
+                            {board[1][0]}
+                        </Cell>
+                        <Cell onClick={() => playFieldLocation(1, 1)} >
+                            {board[1][1]}
+                        </Cell>
+                        <Cell onClick={() => playFieldLocation(1, 2)} >
+                            {board[1][2]}
+                        </Cell>
+                    </tbody>
+                    <tbody>
+                        <Col />
+                        <Cell onClick={() => playFieldLocation(2, 0)} >
+                            {board[2][0]}
+                        </Cell>
+                        <Cell onClick={() => playFieldLocation(2, 1)} >
+                            {board[2][1]}
+                        </Cell>
+                        <Cell onClick={() => playFieldLocation(2, 2)} >
+                            {board[2][2]}
+                        </Cell>
+                    </tbody>
                 </Matchfield>
                 {winner && (
                     <Button onClick={resetPlayBoard}>
