@@ -31,6 +31,8 @@ const Container = styled.main`
 `;
 
 const StyledLink = styled.a`
+  display: grid;
+  place-items: center;
   background: whitesmoke;
   color: black;
   box-shadow: 3px 3px 20px 0px rgba(245,245,245,0.7);
