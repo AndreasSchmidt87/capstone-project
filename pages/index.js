@@ -2,14 +2,11 @@ import styled from "styled-components";
 import Head from "next/head";
 import Header from "../components/Header";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import Image from "next/image";
 import XOPic from "../components/pictures/XOPic.png";
 import Memory from "../components/pictures/Memory.png";
 
 export default function Home() {
-  const router = useRouter();
-  const path = router.pathname;
   return (
     <>
       <Head>

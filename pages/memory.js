@@ -11,33 +11,20 @@ export default function Memory() {
     const [flippedCards, setFlippedCards] = useState([]);
 
     useEffect(() => {
-        initialize();
-    }, []);
-
-    const initialize = () => {
-        cards();
-        setFlippedCards([]);
-    }
-
-    const cards = () => {
         const randomCards = [...board, ...board]
             .sort(() => Math.random() - 0.5)
             .map((v) => v);
         setBoardData(randomCards);
-    }
+        setFlippedCards([]);
+    }, []);
 
     const updateActiveCards = (i) => {
         if (!flippedCards.includes(i)) {
             if (flippedCards.length == 1) {
-                const firstIdx = flippedCards[0];
-                const secondIdx = i;
-                if (boardData[firstIdx] == boardData[secondIdx])
 
-                    setFlippedCards([...flippedCards, i]);
+                setFlippedCards([...flippedCards, i]);
             } else if (flippedCards.length == 2) {
                 setFlippedCards([i]);
-            } else {
-                setFlippedCards([...flippedCards, i]);
             }
         }
     };
