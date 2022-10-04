@@ -23,12 +23,22 @@ export const Card = styled.section`
     transform-style: preserve-3d;
     transition: all 0.2s;
     user-select: none;
-
-    &-0 {
+    
+    &.card-0 {
         transform: rotateY(0deg);
     }
+
     &:active {
         transform: rotateY(180deg);
+    }
+
+    .cardFront, .cardBack {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        backface-visibility: hidden;
+        height: 100%;
     }
     `;
 
@@ -47,15 +57,6 @@ export const CardBack = styled.section`
     transform: rotateY(0);
     z-index: 1;
     
-    .cardFront .cardBack {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        backface-visibility: hidden;
-        height: 100%;
-        border-radius: 50%;
-    }
 
     &::after {
         position: absolute;
@@ -64,6 +65,6 @@ export const CardBack = styled.section`
         left: 0;
         width: 75%;
         height: 75%;
-        border-radius: 50%;
     }
 `;
+

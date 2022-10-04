@@ -4,7 +4,8 @@ import Header from "../components/Header";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import XOPic from "../components/pictures/XOPic.png"
+import XOPic from "../components/pictures/XOPic.png";
+import Memory from "../components/pictures/Memory.png";
 
 export default function Home() {
   const router = useRouter();
@@ -21,7 +22,7 @@ export default function Home() {
         <Link href="/xogame"><StyledLink><Image alt="" width="150" height="150
         " src={XOPic} />X and O Game</StyledLink></Link>
         <Link href="/memory"><StyledLink><Image alt="" width="150" height="150
-        " src={XOPic} />Memory</StyledLink></Link>
+        " src={Memory} />Memory</StyledLink></Link>
       </Container>
     </>
   )
