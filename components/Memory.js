@@ -37,7 +37,7 @@ export const Card = styled.section`
         transform: rotateY(0deg);
     }
     
-    &:active {
+    &.active {
         transform: rotateY(180deg);
     }
 
@@ -62,7 +62,7 @@ export const CardBack = styled.section`
     transform: rotateY(0);
     z-index: 1;
 
-    &::after {
+    &.after {
         position: absolute;
         content: "";
         top: 0;
