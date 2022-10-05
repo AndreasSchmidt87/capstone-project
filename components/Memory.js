@@ -24,14 +24,6 @@ export const Card = styled.section`
     transition: all 0.2s;
     user-select: none;
     
-    &.card-0 {
-        transform: rotateY(0deg);
-    }
-
-    &:active {
-        transform: rotateY(180deg);
-    }
-
     .cardFront, .cardBack {
         position: absolute;
         left: 0;
@@ -39,6 +31,19 @@ export const Card = styled.section`
         width: 100%;
         backface-visibility: hidden;
         height: 100%;
+    }
+    
+    .card-0 {
+        transform: rotateY(0deg);
+    }
+    
+    &:active {
+        transform: rotateY(180deg);
+    }
+
+    &.matched, &.cardFront {
+        background-color: lightgoldenrodyellow;
+        color: white;
     }
     `;
 
@@ -56,7 +61,6 @@ export const CardBack = styled.section`
     background-color: #ddd;
     transform: rotateY(0);
     z-index: 1;
-    
 
     &::after {
         position: absolute;
