@@ -16,9 +16,9 @@ export default function Home() {
       </Head>
       <Header />
       <Container>
-        <Link href="/xogame"><StyledLink><Image alt="" width="150" height="150
+        <Link href="/xogame"><StyledLink><Image alt="" width="290" height="290
         " src={XOPic} />X and O Game</StyledLink></Link>
-        <Link href="/memory"><StyledLink><Image alt="" width="150" height="150
+        <Link href="/memory"><StyledLink><Image alt="" width="290" height="290
         " src={Memory} />Memory</StyledLink></Link>
       </Container>
     </>
@@ -28,6 +28,7 @@ export default function Home() {
 const Container = styled.main`
   display: flex;
   justify-content: center;
+  flex-direction: column;
 `;
 
 const StyledLink = styled.a`
@@ -37,8 +38,9 @@ const StyledLink = styled.a`
   color: black;
   box-shadow: 3px 3px 20px 0px rgba(245,245,245,0.4);
   border-radius: 15px;
-  margin: 20px;
+  margin: 22px;
   padding: 5px;
-  width: 150px;
-  height: 180px;
+  width: 330px;
+  height: 350px;
+  font-size: 1.5rem;
 `;
