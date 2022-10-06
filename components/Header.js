@@ -10,7 +10,7 @@ export default function Header() {
     )
 }
 
-export const Head = styled.header`
+export const HeadLine = styled.header`
     display: grid;
     justify-content: center;
     background-color: #292929;

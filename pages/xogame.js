@@ -1,7 +1,7 @@
 import { Matchfield, Col, Cell, Button, Main } from "../components/XOGame";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Head } from "../components/Header";
+import { HeadLine } from "../components/Header";
 
 const players = {
     CPU: {
@@ -146,9 +146,9 @@ export default function XOGame() {
 
     return (
         <>
-            <Head>
+            <HeadLine>
                 <h1>X and O Game</h1>
-            </Head>
+            </HeadLine>
             <Main>
                 <h2>{!winner && displayTurn() || winner && displayWinner()}</h2>
                 <Matchfield>
