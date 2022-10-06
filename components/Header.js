@@ -3,14 +3,15 @@ import styled from "styled-components";
 export default function Header() {
     return (
         <>
-            <Main>
+            <Head>
                 <h1>Minigame Collection</h1>
-            </Main>
+            </Head>
         </>
     )
 }
 
-const Main = styled.main`
+export const Head = styled.header`
     display: grid;
     justify-content: center;
+    background-color: #292929;
 `;

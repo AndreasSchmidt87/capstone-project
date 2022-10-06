@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import {
     Container, Board, Card, CardFront,
-    CardBack, Head
+    CardBack
 } from "../components/Memory";
+import { Head } from "../components/Header";
 
 const board = ["🤖", "👽", "👻", "🤡", "🐧", "🦚", "😄", "🚀"];
 

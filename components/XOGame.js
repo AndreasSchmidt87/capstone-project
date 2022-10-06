@@ -20,6 +20,7 @@ export const Matchfield = styled.section`
   border: 2px solid black;
   font-family: "Indie Flower", cursive;
   width: 271px;
+  box-shadow: 3px 3px 20px 0px rgba(245,245,245,0.4);
 `;
 
 export const Col = styled.col`

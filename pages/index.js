@@ -35,7 +35,7 @@ const StyledLink = styled.a`
   place-items: center;
   background: whitesmoke;
   color: black;
-  box-shadow: 3px 3px 20px 0px rgba(245,245,245,0.7);
+  box-shadow: 3px 3px 20px 0px rgba(245,245,245,0.4);
   border-radius: 15px;
   margin: 20px;
   padding: 5px;

@@ -1,10 +1,5 @@
 import styled from "styled-components";
 
-export const Head = styled.header`
-    display: flex;
-    justify-content: center;
-`;
-
 export const Container = styled.main`
     min-height: 100vh;
     display: flex;
@@ -21,7 +16,7 @@ export const Board = styled.article`
 export const Card = styled.section`
     border-radius: 4px;
     text-align: center;
-   
+    box-shadow: 3px 3px 20px 0px rgba(245,245,245,0.4);
     height: 75px;
     font-size: 36px;
     font-weight: bold;
@@ -47,7 +42,7 @@ export const Card = styled.section`
         transform: rotateY(180deg);
     }
 
-    &.matched, &.cardFront {
+    &.matched .cardFront {
         background-color: lightgoldenrodyellow;
         color: white;
     }
