@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
 
 html,
 body {
-  background-color: black;
+  background-color: #121212;
   padding: 0;
   margin: 0;
   font-family: 'Indie Flower', cursive;

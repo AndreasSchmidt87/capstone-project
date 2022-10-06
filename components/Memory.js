@@ -11,11 +11,12 @@ export const Board = styled.article`
     display: grid;
     grid-template-columns: repeat(4, 75px);
     grid-gap: 8px;
-`;
+    `;
 
 export const Card = styled.section`
     border-radius: 4px;
     text-align: center;
+    box-shadow: 3px 3px 20px 0px rgba(245,245,245,0.4);
     height: 75px;
     font-size: 36px;
     font-weight: bold;
@@ -24,14 +25,6 @@ export const Card = styled.section`
     transition: all 0.2s;
     user-select: none;
     
-    &.card-0 {
-        transform: rotateY(0deg);
-    }
-
-    &:active {
-        transform: rotateY(180deg);
-    }
-
     .cardFront, .cardBack {
         position: absolute;
         left: 0;
@@ -40,9 +33,24 @@ export const Card = styled.section`
         backface-visibility: hidden;
         height: 100%;
     }
+    
+    .card-0 {
+        transform: rotateY(0deg);
+    }
+    
+    &.active {
+        transform: rotateY(180deg);
+    }
+
+    &.matched .cardFront {
+        background-color: lightgoldenrodyellow;
+        color: white;
+    }
     `;
 
 export const CardFront = styled.section`
+    padding-top: 8px;
+    padding-left: 1px;
     transform: rotateY(180deg);
     background-color: #eee;
     line-height: 70px;
@@ -56,9 +64,8 @@ export const CardBack = styled.section`
     background-color: #ddd;
     transform: rotateY(0);
     z-index: 1;
-    
 
-    &::after {
+    &.after {
         position: absolute;
         content: "";
         top: 0;
