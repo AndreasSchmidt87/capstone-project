@@ -25,19 +25,19 @@ export default function Memory() {
         setMatchedCards([]);
     }
 
-    const updateActiveCards = (repeat) => {
-        if (!flippedCards.includes(repeat)) {
+    const updateActiveCards = (repeatCard) => {
+        if (!flippedCards.includes(repeatCard)) {
             if (flippedCards.length === 1) {
                 const firstIndex = flippedCards[0];
-                const secondIndex = repeat;
+                const secondIndex = repeatCard;
                 if (boardData[firstIndex] === boardData[secondIndex]) {
                     setMatchedCards((prev) => [...prev, firstIndex, secondIndex]);
                 }
-                setFlippedCards([...flippedCards, repeat]);
+                setFlippedCards([...flippedCards, repeatCard]);
             } else if (flippedCards.length === 2) {
-                setFlippedCards([repeat]);
+                setFlippedCards([repeatCard]);
             } else {
-                setFlippedCards([...flippedCards, repeat]);
+                setFlippedCards([...flippedCards, repeatCard]);
             }
         }
     };
@@ -49,15 +49,15 @@ export default function Memory() {
             </HeadLine>
             <Container>
                 <Board>
-                    {boardData.map((data, repeat) => {
-                        const flipped = flippedCards.includes(repeat);
-                        const matched = matchedCards.includes(repeat);
+                    {boardData.map((data, repeatCard) => {
+                        const flipped = flippedCards.includes(repeatCard);
+                        const matched = matchedCards.includes(repeatCard);
                         return (
                             <Card
                                 onClick={() => {
-                                    updateActiveCards(repeat);
+                                    updateActiveCards(repeatCard);
                                 }}
-                                key={repeat}
+                                key={repeatCard}
                                 className={`section ${flipped || matched ? "active" : ""} ${matched ? "matched" : ""}`}
                             >
                                 <CardFront className="cardFront">{data}</CardFront>

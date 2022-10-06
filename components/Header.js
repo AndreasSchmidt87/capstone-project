@@ -3,9 +3,9 @@ import styled from "styled-components";
 export default function Header() {
     return (
         <>
-            <Head>
+            <HeadLine>
                 <h1>Minigame Collection</h1>
-            </Head>
+            </HeadLine>
         </>
     )
 }
