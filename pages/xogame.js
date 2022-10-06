@@ -180,7 +180,7 @@ export default function XOGame() {
                         {board[2][2]}
                     </Cell>
                 </Matchfield>
-                <Link href="/">Home</Link>
+                <Link href="/">Back to Collection</Link>
                 {winner && (
                     <Button onClick={resetPlayBoard}>
                         Restart

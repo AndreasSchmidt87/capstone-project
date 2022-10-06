@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const Head = styled.header`
+    display: flex;
+    justify-content: center;
+`;
+
 export const Container = styled.main`
     min-height: 100vh;
     display: flex;
@@ -11,11 +16,12 @@ export const Board = styled.article`
     display: grid;
     grid-template-columns: repeat(4, 75px);
     grid-gap: 8px;
-`;
+    `;
 
 export const Card = styled.section`
     border-radius: 4px;
     text-align: center;
+   
     height: 75px;
     font-size: 36px;
     font-weight: bold;
@@ -48,6 +54,8 @@ export const Card = styled.section`
     `;
 
 export const CardFront = styled.section`
+    padding-top: 8px;
+    padding-left: 1px;
     transform: rotateY(180deg);
     background-color: #eee;
     line-height: 70px;

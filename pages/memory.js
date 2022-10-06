@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import {
     Container, Board, Card, CardFront,
-    CardBack
+    CardBack, Head
 } from "../components/Memory";
 
 const board = ["🤖", "👽", "👻", "🤡", "🐧", "🦚", "😄", "🚀"];
@@ -18,43 +18,45 @@ export default function Memory() {
     const initialize = () => {
         const randomCards = [...board, ...board]
             .sort(() => Math.random() - 0.5)
-            .map((v) => v);
+            .map((mixed) => mixed);
         setBoardData(randomCards);
         setFlippedCards([]);
         setMatchedCards([]);
     }
 
-    const updateActiveCards = (i) => {
-        if (!flippedCards.includes(i)) {
-            if (flippedCards.length == 1) {
+    const updateActiveCards = (iterate) => {
+        if (!flippedCards.includes(iterate)) {
+            if (flippedCards.length === 1) {
                 const firstIdx = flippedCards[0];
-                const secondIdx = i;
-                if (boardData[firstIdx] == boardData[secondIdx]) {
+                const secondIdx = iterate;
+                if (boardData[firstIdx] === boardData[secondIdx]) {
                     setMatchedCards((prev) => [...prev, firstIdx, secondIdx]);
                 }
-                setFlippedCards([...flippedCards, i]);
-            } else if (flippedCards.length == 2) {
-                setFlippedCards([i]);
+                setFlippedCards([...flippedCards, iterate]);
+            } else if (flippedCards.length === 2) {
+                setFlippedCards([iterate]);
             } else {
-                setFlippedCards([...flippedCards, i]);
+                setFlippedCards([...flippedCards, iterate]);
             }
         }
     };
 
     return (
         <>
-            <h1>Memory</h1>
+            <Head>
+                <h1>Memory</h1>
+            </Head>
             <Container>
                 <Board>
-                    {boardData.map((data, i) => {
-                        const flipped = flippedCards.includes(i) ? true : false;
-                        const matched = matchedCards.includes(i) ? true : false;
+                    {boardData.map((data, iterate) => {
+                        const flipped = flippedCards.includes(iterate);
+                        const matched = matchedCards.includes(iterate);
                         return (
                             <Card
                                 onClick={() => {
-                                    updateActiveCards(i);
+                                    updateActiveCards(iterate);
                                 }}
-                                key={i}
+                                key={iterate}
                                 className={`section ${flipped || matched ? "active" : ""} ${matched ? "matched" : ""}`}
                             >
                                 <CardFront className="cardFront">{data}</CardFront>
