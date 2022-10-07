@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import {
     Container, Board, Card, CardFront,
-    CardBack
+    CardBack, Menu
 } from "../components/Memory";
+import Link from "next/link";
 import { HeadLine } from "../components/Header";
+import { Button } from "../components/XOGame";
 
 const board = ["🤖", "👽", "👻", "🤡", "🐧", "🦚", "😄", "🚀"];
 
@@ -11,18 +13,28 @@ export default function Memory() {
     const [boardData, setBoardData] = useState([]);
     const [flippedCards, setFlippedCards] = useState([]);
     const [matchedCards, setMatchedCards] = useState([]);
+    const [moves, setMoves] = useState(0);
+    const [gameOver, setGameOver] = useState();
 
     useEffect(() => {
         initialize();
     }, []);
 
+    useEffect(() => {
+        if (matchedCards.length === 16) {
+            setGameOver(`you finished!`);
+        }
+    }, [moves]);
+
     const initialize = () => {
         const randomCards = [...board, ...board]
             .sort(() => Math.random() - 0.5)
-            .map((mixed) => mixed);
+            .map((move => move));
         setBoardData(randomCards);
+        setGameOver([]);
         setFlippedCards([]);
         setMatchedCards([]);
+        setMoves(0);
     }
 
     const updateActiveCards = (repeatCard) => {
@@ -39,6 +51,7 @@ export default function Memory() {
             } else {
                 setFlippedCards([...flippedCards, repeatCard]);
             }
+            setMoves((move) => move + 1);
         }
     };
 
@@ -47,6 +60,9 @@ export default function Memory() {
             <HeadLine>
                 <h1>Memory</h1>
             </HeadLine>
+            <Menu>
+                <p>{`Moves -  ${moves}`}</p>
+            </Menu>
             <Container>
                 <Board>
                     {boardData.map((data, repeatCard) => {
@@ -58,7 +74,7 @@ export default function Memory() {
                                     updateActiveCards(repeatCard);
                                 }}
                                 key={repeatCard}
-                                className={`section ${flipped || matched ? "active" : ""} ${matched ? "matched" : ""}`}
+                                className={`section ${flipped || matched ? "active" : ""} ${matched ? "matched" : ""} ${gameOver ? "gameover" : ""}`}
                             >
                                 <CardFront className="cardFront">{data}</CardFront>
                                 <CardBack className="cardBack"></CardBack>
@@ -67,6 +83,13 @@ export default function Memory() {
                     })}
                 </Board>
             </Container>
+            <Menu>
+                <p>{`${gameOver}`}</p>
+                <Link href="/">Back to Collection</Link>
+                <Button onClick={() => initialize()}>
+                    Restart
+                </Button>
+            </Menu>
         </>
     )
 }  
