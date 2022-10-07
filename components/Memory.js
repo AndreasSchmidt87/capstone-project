@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.main`
-    min-height: 100vh;
+    min-height: 50vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -74,4 +74,18 @@ export const CardBack = styled.section`
         height: 75%;
     }
 `;
+
+export const Menu = styled.nav`
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    flex-direction: column;
+
+    p {
+        margin: 10px;
+        font-size: 35px;
+        font-weight: 600;
+    }
+`;
+
 

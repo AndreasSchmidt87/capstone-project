@@ -27,8 +27,8 @@ export default function Home() {
 
 const Container = styled.main`
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  flex-direction: column;
 `;
 
 const StyledLink = styled.a`
