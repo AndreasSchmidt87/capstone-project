@@ -28,6 +28,7 @@ export default function Home() {
 const Container = styled.main`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 `;
 
 const StyledLink = styled.a`
