@@ -20,6 +20,8 @@ export default function Home() {
         " src={XOPic} />X and O Game</StyledLink></Link>
         <Link href="/memory"><StyledLink><Image alt="" width="290" height="290
         " src={Memory} />Memory</StyledLink></Link>
+        <Link href="/snake"><StyledLink><Image alt="" width="290" height="290
+        " src={XOPic} />Snake</StyledLink></Link>
       </Container>
     </>
   )
