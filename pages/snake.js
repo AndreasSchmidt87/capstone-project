@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { HeadLine } from "../components/Header";
 import { Matchfield } from "../components/Snake";
+import { Main } from '../components/XOGame';
 
 export default function Snake() {
     const canvasRef = useRef(null);
@@ -37,10 +38,10 @@ export default function Snake() {
         const snake = [
             { x: 150, y: 150 },
             { x: 140, y: 150 },
-            { x: 150, y: 150 },
             { x: 130, y: 150 },
             { x: 120, y: 150 },
-            { x: 110, y: 150 }
+            { x: 110, y: 150 },
+            { x: 100, y: 150 }
         ];
 
         drawSnake(snake, snakeboard_ctx);
@@ -48,13 +49,18 @@ export default function Snake() {
 
     return (
         <>
-            <HeadLine>Snake</HeadLine>
-            <Matchfield
-                id="snakeboard"
-                ref={canvasRef}
-                width="330"
-                height="330">
-            </Matchfield>
+            <HeadLine>
+                <h1>Snake</h1>
+            </HeadLine>
+            <Main>
+                <Matchfield
+                    id="snakeboard"
+                    ref={canvasRef}
+                    width="330"
+                    height="330"
+                >
+                </Matchfield>
+            </Main>
         </>
     )
 }
