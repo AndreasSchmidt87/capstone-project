@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import XOPic from "../components/pictures/XOPic.png";
 import Memory from "../components/pictures/Memory.png";
+import Snake from "../components/pictures/Snake.png"
 
 export default function Home() {
   return (
@@ -21,7 +22,7 @@ export default function Home() {
         <Link href="/memory"><StyledLink><Image alt="" width="290" height="290
         " src={Memory} />Memory</StyledLink></Link>
         <Link href="/snake"><StyledLink><Image alt="" width="290" height="290
-        " src={XOPic} />Snake</StyledLink></Link>
+        " src={Snake} />Snake</StyledLink></Link>
       </Container>
     </>
   )

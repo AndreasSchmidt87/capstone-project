@@ -14,17 +14,6 @@ export default function Snake() {
     const snake_col = 'lightblue';
     const snake_border = 'darkblue';
 
-    function main() {
-        setTimeout(
-            (function onTick() {
-                clearCanvas();
-                moveSnake();
-                drawSnake();
-                main();
-            }, 100)
-        )
-    }
-
     function drawSnake(snake, snakeboard_ctx) {
         snake.forEach((snakePart) => drawSnakePart(snakePart, snakeboard_ctx));
     }
@@ -43,11 +32,15 @@ export default function Snake() {
         snakeboard_ctx.strokeRect(0, 0, snakeboard.width, snakeboard.heigth);
     }
 
+    function moveSnake(snake, directionX, directionY) {
+        const head = { x: snake[0].x + directionX, y: snake[0].y + directionY };
+        snake.unshift(head);
+        snake.pop();
+    }
+
     useEffect(() => {
         const snakeboard = document.getElementById("snakeboard");
         const snakeboard_ctx = snakeboard.getContext('2d')
-
-        clearCanvas(snakeboard, snakeboard_ctx);
 
         const snake = [
             { x: 150, y: 150 },
@@ -58,16 +51,13 @@ export default function Snake() {
             { x: 100, y: 150 }
         ];
 
-        drawSnake(snake, snakeboard_ctx);
-        moveSnake(snake, directionX, directionY);
-        main();
-    }, [main])
+        setTimeout(function onTick() {
+            clearCanvas(snakeboard, snakeboard_ctx);
+            drawSnake(snake, snakeboard_ctx);
+            moveSnake(snake, directionX, directionY);
+        }, 100)
 
-    function moveSnake(snake, directionX, directionY) {
-        const head = { x: snake[0].x + directionX, y: snake[0].y + directionY };
-        snake.unshift(head);
-        snake.pop();
-    }
+    }, [])
 
     return (
         <>
