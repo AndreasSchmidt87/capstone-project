@@ -6,10 +6,24 @@ import { Main } from '../components/XOGame';
 export default function Snake() {
     const canvasRef = useRef(null);
 
+    const directionX = 10;
+    const directionY = 10;
+
     const board_border = 'black';
     const board_background = 'white';
     const snake_col = 'lightblue';
     const snake_border = 'darkblue';
+
+    function main() {
+        setTimeout(
+            (function onTick() {
+                clearCanvas();
+                moveSnake();
+                drawSnake();
+                main();
+            }, 100)
+        )
+    }
 
     function drawSnake(snake, snakeboard_ctx) {
         snake.forEach((snakePart) => drawSnakePart(snakePart, snakeboard_ctx));
@@ -45,7 +59,15 @@ export default function Snake() {
         ];
 
         drawSnake(snake, snakeboard_ctx);
-    }, [])
+        moveSnake(snake, directionX, directionY);
+        main();
+    }, [main])
+
+    function moveSnake(snake, directionX, directionY) {
+        const head = { x: snake[0].x + directionX, y: snake[0].y + directionY };
+        snake.unshift(head);
+        snake.pop();
+    }
 
     return (
         <>
