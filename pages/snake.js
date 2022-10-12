@@ -6,8 +6,8 @@ import { Main } from '../components/XOGame';
 export default function Snake() {
     const canvasRef = useRef(null);
 
-    const directionX = 10;
-    const directionY = 10;
+    let directionX = 10;
+    let directionY = 0;
 
     const board_border = 'black';
     const board_background = 'white';
@@ -38,9 +38,45 @@ export default function Snake() {
         snake.pop();
     }
 
+    function change_direction(event, changing_direction) {
+        const LEFT_KEY = 37;
+        const RIGHT_KEY = 39;
+        const UP_KEY = 38;
+        const DOWN_KEY = 40;
+
+        if (changing_direction) return;
+        changing_direction = true;
+
+        const keyPressed = event.keyCode;
+        const goingUp = directionY === -10;
+        const goingDown = directionY === 10;
+        const goingRight = directionX === -10;
+        const goingLeft = directionX === 10;
+
+        if (keyPressed === LEFT_KEY && !goingRight) {
+            directionX = -10;
+            directionY = 0;
+        }
+        if (keyPressed === UP_KEY && !goingDown) {
+            directionX = 0;
+            directionY = -10;
+        }
+        if (keyPressed === RIGHT_KEY && !goingLeft) {
+            directionX = 10;
+            directionY = 0;
+        }
+        if (keyPressed === DOWN_KEY && !goingUp) {
+            directionX = 0;
+            directionY = 10;
+        }
+    }
+
     useEffect(() => {
         const snakeboard = document.getElementById("snakeboard");
-        const snakeboard_ctx = snakeboard.getContext('2d')
+        const snakeboard_ctx = snakeboard.getContext('2d');
+
+        const event = document.addEventListener("keydown", change_direction);
+        const changing_direction = false;
 
         const snake = [
             { x: 150, y: 150 },
@@ -51,10 +87,11 @@ export default function Snake() {
             { x: 100, y: 150 }
         ];
 
-        setTimeout(function onTick() {
+        setInterval(function onTick() {
+            change_direction(changing_direction);
             clearCanvas(snakeboard, snakeboard_ctx);
             drawSnake(snake, snakeboard_ctx);
-            moveSnake(snake, directionX, directionY);
+            moveSnake(snake, directionX, directionY, event);
         }, 100)
 
     }, [])
