@@ -2,9 +2,13 @@ import { useEffect, useRef } from 'react';
 import { HeadLine } from "../components/Header";
 import { Matchfield } from "../components/Snake";
 import { Main } from '../components/XOGame';
+import Link from 'next/link';
 
 export default function Snake() {
     const canvasRef = useRef(null);
+
+    let directionX = 10;
+    let directionY = 0;
 
     const board_border = 'black';
     const board_background = 'white';
@@ -29,11 +33,50 @@ export default function Snake() {
         snakeboard_ctx.strokeRect(0, 0, snakeboard.width, snakeboard.heigth);
     }
 
+    function moveSnake(snake, directionX, directionY) {
+        const head = { x: snake[0].x + directionX, y: snake[0].y + directionY };
+        snake.unshift(head);
+        snake.pop();
+    }
+
+    function change_direction(event, changing_direction) {
+        const LEFT_KEY = 37;
+        const RIGHT_KEY = 39;
+        const UP_KEY = 38;
+        const DOWN_KEY = 40;
+
+        if (changing_direction) return;
+
+        const keyPressed = event.keyCode;
+        const goingUp = directionY === -10;
+        const goingDown = directionY === 10;
+        const goingRight = directionX === 10;
+        const goingLeft = directionX === -10;
+
+        if (keyPressed === LEFT_KEY && !goingRight) {
+            directionX = -10;
+            directionY = 0;
+        }
+        if (keyPressed === UP_KEY && !goingDown) {
+            directionX = 0;
+            directionY = -10;
+        }
+        if (keyPressed === RIGHT_KEY && !goingLeft) {
+            directionX = 10;
+            directionY = 0;
+        }
+        if (keyPressed === DOWN_KEY && !goingUp) {
+            directionX = 0;
+            directionY = 10;
+        }
+    }
+
     useEffect(() => {
         const snakeboard = document.getElementById("snakeboard");
-        const snakeboard_ctx = snakeboard.getContext('2d')
+        const snakeboard_ctx = snakeboard.getContext('2d');
 
-        clearCanvas(snakeboard, snakeboard_ctx);
+        const event = document.addEventListener("keydown", change_direction);
+        const changing_direction = false;
 
         const snake = [
             { x: 150, y: 150 },
@@ -44,7 +87,13 @@ export default function Snake() {
             { x: 100, y: 150 }
         ];
 
-        drawSnake(snake, snakeboard_ctx);
+        setInterval(function onTick() {
+            change_direction(changing_direction);
+            clearCanvas(snakeboard, snakeboard_ctx);
+            drawSnake(snake, snakeboard_ctx);
+            moveSnake(snake, directionX, directionY, event);
+        }, 100)
+
     }, [])
 
     return (
@@ -60,6 +109,7 @@ export default function Snake() {
                     height="330"
                 >
                 </Matchfield>
+                <Link href="/">Back to Collection</Link>
             </Main>
         </>
     )
