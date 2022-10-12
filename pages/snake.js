@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { HeadLine } from "../components/Header";
 import { Matchfield } from "../components/Snake";
 import { Main } from '../components/XOGame';
+import Link from 'next/link';
 
 export default function Snake() {
     const canvasRef = useRef(null);
@@ -45,13 +46,13 @@ export default function Snake() {
         const DOWN_KEY = 40;
 
         if (changing_direction) return;
-        changing_direction = true;
+
 
         const keyPressed = event.keyCode;
         const goingUp = directionY === -10;
         const goingDown = directionY === 10;
-        const goingRight = directionX === -10;
-        const goingLeft = directionX === 10;
+        const goingRight = directionX === 10;
+        const goingLeft = directionX === -10;
 
         if (keyPressed === LEFT_KEY && !goingRight) {
             directionX = -10;
@@ -109,6 +110,7 @@ export default function Snake() {
                     height="330"
                 >
                 </Matchfield>
+                <Link href="/">Back to Collection</Link>
             </Main>
         </>
     )
