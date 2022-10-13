@@ -42,7 +42,7 @@ export default function Snake() {
         snake.unshift(head);
         const has_eaten_food = snake[0].x === foodX && snake[0].y === foodY;
         if (has_eaten_food) {
-            score = setScore(score.state + 10);
+            setScore((previousScore) => (previousScore + 10));
             // document.getElementById('score').innerHTML = score;
             generate_food(snakeboard, snake, score);
             return { ...score };
