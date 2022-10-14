@@ -8,3 +8,9 @@ export const Matchfield = styled.canvas`
     transform: translate(-50%, -50%);
     }
 `;
+
+export const Score = styled.p`
+    text-align: center;
+    font-size: 65px;
+    margin: 0;
+`;

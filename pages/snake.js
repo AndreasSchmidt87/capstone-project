@@ -1,8 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { HeadLine } from "../components/Header";
-import { Matchfield } from "../components/Snake";
-import { Main } from '../components/XOGame';
-import Link from 'next/link';
+
+import { Matchfield, Score } from "../components/Snake";
+import { Container } from '../components/Memory';
 
 export default function Snake() {
     const canvasRef = useRef(null);
@@ -10,42 +10,54 @@ export default function Snake() {
     let directionX = 10;
     let directionY = 0;
 
+    let foodX;
+    let foodY;
+
     const board_border = 'black';
     const board_background = 'white';
     const snake_col = 'lightblue';
     const snake_border = 'darkblue';
 
-    function drawSnake(snake, snakeboard_ctx) {
-        snake.forEach((snakePart) => drawSnakePart(snakePart, snakeboard_ctx));
+    const [score, setScore] = useState(0);
+
+    function drawSnake(snake, snakeboardCTX) {
+        snake.forEach((snakePart) => drawSnakePart(snakePart, snakeboardCTX));
     }
 
-    function drawSnakePart(snakePart, snakeboard_ctx) {
-        snakeboard_ctx.fillStyle = snake_col;
-        snakeboard_ctx.strokeStyle = snake_border;
-        snakeboard_ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
-        snakeboard_ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
+    function drawSnakePart(snakePart, snakeboardCTX) {
+        snakeboardCTX.fillStyle = snake_col;
+        snakeboardCTX.strokeStyle = snake_border;
+        snakeboardCTX.fillRect(snakePart.x, snakePart.y, 10, 10);
+        snakeboardCTX.strokeRect(snakePart.x, snakePart.y, 10, 10);
     }
 
-    function clearCanvas(snakeboard, snakeboard_ctx) {
-        snakeboard_ctx.fillStyle = board_background;
-        snakeboard_ctx.strokestyle = board_border;
-        snakeboard_ctx.fillRect(0, 0, snakeboard.width, snakeboard.height);
-        snakeboard_ctx.strokeRect(0, 0, snakeboard.width, snakeboard.heigth);
+    function clearCanvas(snakeboard, snakeboardCTX) {
+        snakeboardCTX.fillStyle = board_background;
+        snakeboardCTX.strokestyle = board_border;
+        snakeboardCTX.fillRect(0, 0, snakeboard.width, snakeboard.height);
+        snakeboardCTX.strokeRect(0, 0, snakeboard.width, snakeboard.heigth);
     }
 
-    function moveSnake(snake, directionX, directionY) {
+    function moveSnake(snake, directionX, directionY, snakeboard, score) {
         const head = { x: snake[0].x + directionX, y: snake[0].y + directionY };
         snake.unshift(head);
-        snake.pop();
+        const has_eaten_food = snake[0].x === foodX && snake[0].y === foodY;
+        if (has_eaten_food) {
+            setScore((previousScore) => (previousScore + 10));
+            generate_food(snakeboard, snake, score);
+            return { ...score };
+        } else {
+            snake.pop();
+        }
     }
 
-    function change_direction(event, changing_direction) {
+    function change_direction(event, changeingDirection) {
         const LEFT_KEY = 37;
         const RIGHT_KEY = 39;
         const UP_KEY = 38;
         const DOWN_KEY = 40;
 
-        if (changing_direction) return;
+        if (changeingDirection) return;
 
         const keyPressed = event.keyCode;
         const goingUp = directionY === -10;
@@ -71,12 +83,33 @@ export default function Snake() {
         }
     }
 
+    function drawFood(foodX, foodY, snakeboardCTX) {
+        snakeboardCTX.fillStyle = 'lightgreen';
+        snakeboardCTX.strokeStyle = 'darkgreen';
+        snakeboardCTX.fillRect(foodX, foodY, 10, 10);
+        snakeboardCTX.strokeRect(foodX, foodY, 10, 10);
+    }
+
+    function random_food(min, max) {
+        return Math.round((Math.random() * (max - min) + min) / 10) * 10;
+    }
+
+    function generate_food(snakeboard, snake) {
+        foodX = random_food(0, snakeboard.width - 10);
+        foodY = random_food(0, snakeboard.height - 10);
+        snake.forEach(function has_snake_eaten_food(part) {
+            const has_eaten = part.x === foodX && part.y === foodY;
+            if (has_eaten) generate_food();
+        });
+    }
+
+
     useEffect(() => {
         const snakeboard = document.getElementById("snakeboard");
-        const snakeboard_ctx = snakeboard.getContext('2d');
+        const snakeboardCTX = snakeboard.getContext('2d');
 
         const event = document.addEventListener("keydown", change_direction);
-        const changing_direction = false;
+        const changeingDirection = false;
 
         const snake = [
             { x: 150, y: 150 },
@@ -87,11 +120,14 @@ export default function Snake() {
             { x: 100, y: 150 }
         ];
 
+        generate_food(snakeboard, snake);
+
         setInterval(function onTick() {
-            change_direction(changing_direction);
-            clearCanvas(snakeboard, snakeboard_ctx);
-            drawSnake(snake, snakeboard_ctx);
-            moveSnake(snake, directionX, directionY, event);
+            change_direction(changeingDirection);
+            clearCanvas(snakeboard, snakeboardCTX);
+            drawSnake(snake, snakeboardCTX);
+            moveSnake(snake, directionX, directionY, snakeboard, score);
+            drawFood(foodX, foodY, snakeboardCTX);
         }, 100)
 
     }, [])
@@ -101,7 +137,8 @@ export default function Snake() {
             <HeadLine>
                 <h1>Snake</h1>
             </HeadLine>
-            <Main>
+            <Score>Score: {score}</Score>
+            <Container>
                 <Matchfield
                     id="snakeboard"
                     ref={canvasRef}
@@ -109,8 +146,7 @@ export default function Snake() {
                     height="330"
                 >
                 </Matchfield>
-                <Link href="/">Back to Collection</Link>
-            </Main>
+            </Container>
         </>
     )
 }
