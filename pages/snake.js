@@ -57,7 +57,7 @@ export default function Snake() {
         const DOWN_KEY = 40;
 
         if (changeingDirection) return;
-        changeingDirection = true;
+
 
         const keyPressed = event.keyCode;
         const goingUp = directionY === -10;
