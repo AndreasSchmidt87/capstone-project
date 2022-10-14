@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { HeadLine } from "../components/Header";
+
 import { Matchfield, Score } from "../components/Snake";
 import { Container } from '../components/Memory';
 
@@ -57,7 +58,6 @@ export default function Snake() {
         const DOWN_KEY = 40;
 
         if (changeingDirection) return;
-
 
         const keyPressed = event.keyCode;
         const goingUp = directionY === -10;
