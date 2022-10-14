@@ -1,7 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
 import { HeadLine } from "../components/Header";
 import { Matchfield, Score } from "../components/Snake";
-import { Container } from '../components/Memory';
+import { Container, Menu } from '../components/Memory';
+import Link from 'next/link';
 
 export default function Snake() {
     const canvasRef = useRef(null);
@@ -103,6 +104,18 @@ export default function Snake() {
         });
     }
 
+    function hasGameEnded(snake, snakeboard) {
+        for (let i = 4; i < snake.length; i++) {
+            const hasCollided = snake[i].x === snake[0].x && snake[i].y === snake[0].y;
+            if (hasCollided)
+                return true;
+        }
+        const hitLeftWall = snake[0].x < 0;
+        const hitRightWall = snake[0].x > snakeboard.width - 10;
+        const hitTopWall = snake[0].y < 0;
+        const hitBottomWall = snake[0].y > snakeboard.height - 10;
+        return hitLeftWall || hitRightWall || hitTopWall || hitBottomWall
+    }
 
     useEffect(() => {
         const snakeboard = document.getElementById("snakeboard");
@@ -123,10 +136,11 @@ export default function Snake() {
         generate_food(snakeboard, snake);
 
         setInterval(function onTick() {
+            if (hasGameEnded(snake, snakeboard)) return;
             change_direction(changeingDirection);
             clearCanvas(snakeboard, snakeboardCTX);
             drawSnake(snake, snakeboardCTX);
-            moveSnake(snake, directionX, directionY, snakeboard, score);
+            moveSnake(snake, directionX, directionY, snakeboard, score, event);
             drawFood(foodX, foodY, snakeboardCTX);
         }, 100)
 
@@ -147,6 +161,9 @@ export default function Snake() {
                 >
                 </Matchfield>
             </Container>
+            <Menu>
+                <Link href="/">Back to Collection</Link>
+            </Menu>
         </>
     )
 }
