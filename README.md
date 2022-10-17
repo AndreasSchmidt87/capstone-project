@@ -1,15 +1,15 @@
 ## Minigame Collection
 
 The Site is a collection of minigames for one player and intended as a little pastime.
-<p align="center>
-![MiniGameCollection](https://user-images.githubusercontent.com/76123735/196172125-a1d091e4-d026-4295-8ad0-73d5f00f7b6c.png)
+<p align="center">
+<img width="375" heigth="812" src="https://user-images.githubusercontent.com/76123735/196172665-9998d6d4-fe58-4b64-8d1f-f511f4dfdf09.png">
 </p>
 
 
 ## Memory
 
-The Memory game is palyed on a 4x4 grid. The player uncover cards and looking for matching pairs.
-<p align="center>
+The Memory game is palyed on a 4x4 grid. The player uncover cards and looking for matching pairs.The game is shows you how many moves it took you.
+<p align="center">
 <img width="323" alt="Memory" src="https://user-images.githubusercontent.com/76123735/196170585-419f19f6-5bb4-4aad-af7c-2635e2d515e1.png">
 </p>
 
@@ -24,7 +24,7 @@ The X and O Game is played on a 3×3 grid. The player who has the first move is 
 ## Snake
 
 The Game is very simple. The character is controlled with the arrow keys on your keyboard, you can't touch the walls or the snake's body. The aim is to eat the green squares and to get as high a score as possible, if the snake eats a square, it is always lengthened by one link.
-<p align="center>
+<p align="center">
 <img width="340" alt="Snake" src="https://user-images.githubusercontent.com/76123735/196170817-57e64cd1-6643-42e2-b6f2-d8be9c4d0b73.png">
 </p>
 
